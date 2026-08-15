@@ -1,0 +1,390 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --background: #FAF8F5;
+  --foreground: #1A2825;
+  --card: #FFFFFF;
+  --card-foreground: #1A2825;
+  --primary: #2A7A5B;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EEF4F1;
+  --secondary-foreground: #2A7A5B;
+  --muted: #F0EDE8;
+  --muted-foreground: #6B7A78;
+  --accent: #E07B54;
+  --accent-foreground: #FFFFFF;
+  --border: #DDE5E3;
+  --ring: #2A7A5B;
+  --radius: 14px;
+  --danger: #c0392b;
+  --danger-bg: #c0392b18;
+  --blue: #5B7ABA;
+  --purple: #8B5BAA;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: #E8E4DE;
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: 'Fraunces', serif; margin: 0; }
+p { margin: 0; }
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+input, textarea, select { font-family: inherit; }
+
+/* ---------- App shell (moldura de "celular") ---------- */
+.app-outer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #E8E4DE;
+  padding: 20px 0;
+}
+
+.app-shell {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  min-height: 100vh;
+  background-color: var(--background);
+  box-shadow: 0 0 60px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (min-width: 460px) {
+  .app-shell {
+    min-height: 860px;
+    max-height: 860px;
+    border-radius: 32px;
+  }
+}
+
+.app-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.app-body::-webkit-scrollbar { display: none; }
+
+/* ---------- Utilitários de layout ---------- */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.gap-1 { gap: 4px; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+.flex-1 { flex: 1; min-width: 0; }
+.shrink-0 { flex-shrink: 0; }
+.grid { display: grid; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.w-full { width: 100%; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.relative { position: relative; }
+
+/* ---------- Header padrão das telas internas ---------- */
+.screen-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 20px 16px;
+  background-color: var(--background);
+  flex-shrink: 0;
+}
+.btn-back {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background-color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.screen-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.screen-header .subtitle {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  margin-top: 2px;
+}
+.header-right { margin-left: auto; }
+
+.btn-icon-round {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--muted);
+  transition: background-color .15s;
+}
+.btn-icon-round.active { background-color: var(--primary); }
+
+/* ---------- Cards genéricos ---------- */
+.card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+}
+.card-shadow { box-shadow: 0 1px 8px rgba(0,0,0,0.04); }
+
+/* ---------- Formulários ---------- */
+.field { margin-bottom: 16px; }
+.field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted-foreground);
+}
+.field input, .field textarea, .field select {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  outline: none;
+  border: 2px solid transparent;
+  background-color: var(--muted);
+  color: var(--foreground);
+  transition: border-color .15s;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+  border-color: var(--primary);
+}
+.field textarea { resize: none; }
+.field-compact input, .field-compact textarea {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background-color: var(--muted);
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+  transition: background-color .15s;
+}
+.btn-primary { background-color: var(--primary); color: var(--primary-foreground); }
+.btn-primary:disabled { background-color: var(--muted-foreground); cursor: not-allowed; }
+.btn-secondary { background-color: var(--secondary); color: var(--primary); }
+.btn-muted { background-color: var(--muted); color: var(--foreground); }
+.btn-danger { background-color: var(--danger-bg); color: var(--danger); }
+.btn-sm { padding: 10px 14px; border-radius: 12px; font-size: 13px; }
+
+.error-box {
+  background-color: var(--danger-bg);
+  color: var(--danger);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+/* ---------- Bottom nav ---------- */
+.bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 8px 8px 16px;
+  background-color: var(--card);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.bottom-nav .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+.bottom-nav .nav-item.active { background-color: var(--secondary); }
+.bottom-nav .nav-item span {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+.bottom-nav .nav-item.active span { color: var(--primary); }
+.nav-icon-wrap { position: relative; }
+.nav-badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  font-size: 9px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Avatares ---------- */
+.avatar {
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.avatar-round { border-radius: 999px; }
+
+/* ---------- Badges / chips ---------- */
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+.chip {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* ---------- Progress bar ---------- */
+.progress-track {
+  height: 8px;
+  border-radius: 999px;
+  background-color: var(--muted);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background-color: var(--primary);
+  transition: width .5s;
+}
+
+/* ---------- Scroll horizontal sem barra ---------- */
+.scroll-x {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.scroll-x::-webkit-scrollbar { display: none; }
+
+/* ---------- Modal (bottom sheet) ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 50;
+}
+.modal-sheet {
+  width: 100%;
+  max-width: 420px;
+  max-height: 85%;
+  overflow-y: auto;
+  background-color: var(--card);
+  border-radius: 24px 24px 0 0;
+  padding: 24px 24px 40px;
+}
+
+/* ---------- Utilitários de texto ---------- */
+.text-xs { font-size: 12px; }
+.text-sm { font-size: 14px; }
+.text-muted { color: var(--muted-foreground); }
+.text-primary { color: var(--primary); }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.serif { font-family: 'Fraunces', serif; }
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---------- Tela de login/registro (hero) ---------- */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 64px 24px 40px;
+  background-color: var(--primary);
+  min-height: 38%;
+}
+.hero-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  background-color: rgba(255,255,255,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: 34px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 8px;
+}
+.hero p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+
+.list-panel {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+.list-row:last-child { border-bottom: none; }
