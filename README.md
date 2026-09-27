@@ -1,4 +1,4 @@
-# CuidarBem — Sistema de Gestão de Cuidados (versão PHP)
+# CuidarIdoso — Sistema de Gestão de Cuidados (versão PHP)
 
 Esta é a versão em **PHP puro** (sem frameworks) do projeto original em React/TypeScript.
 Mantém o mesmo visual (cores, tipografia Fraunces/Outfit, moldura de "celular") e as mesmas
